@@ -54,9 +54,6 @@ app.get("/", async (c) => {
         ${user
           ? html`
               <div>
-                <a href="/logout">${user.login} をログアウト</a>
-              </div>
-              <div>
                 <a href="/schedules/new">予定を作る</a>
               </div>
               ${schedules.length > 0
@@ -66,11 +63,7 @@ app.get("/", async (c) => {
                   `
                 : ""}
             `
-          : html`
-              <div>
-                <a href="/login">ログイン</a>
-              </div>
-            `}
+          : ""}
       `,
     ),
   );
