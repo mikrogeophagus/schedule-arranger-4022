@@ -6,10 +6,12 @@ function layout(c, title, body) {
     <html>
       <head>
         <title>${title}</title>
-        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/stylesheets/bundle.css" />
       </head>
       <body>
-        ${body}
+        <div class="container">${body}</div>
         <script src="/javascripts/bundle.js"></script>
       </body>
     </html>

@@ -1,5 +1,9 @@
 "use strict";
 import $ from "jquery";
+globalThis.jQuery = $;
+
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 $(".availability-toggle-button").each((i, e) => {
   const button = $(e);
