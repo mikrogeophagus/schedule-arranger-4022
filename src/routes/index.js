@@ -43,8 +43,14 @@ app.get("/", async (c) => {
       c,
       null,
       html`
-        <h1>予定調整くん</h1>
-        <p>Welcome to 予定調整くん</p>
+        <div class="my-3">
+          <div class="p-5 bg-light rounded-3">
+            <h1 class="text-body">予定調整くん</h1>
+            <p class="lead">
+              予定調整くんは、GitHubで認証でき、予定を作って出欠が取れるサービスです。
+            </p>
+          </div>
+        </div>
         ${user
           ? html`
               <div>
