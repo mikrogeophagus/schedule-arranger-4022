@@ -41,7 +41,7 @@ app.get("/", async (c) => {
   return c.html(
     layout(
       c,
-      "予定調整くん",
+      null,
       html`
         <h1>予定調整くん</h1>
         <p>Welcome to 予定調整くん</p>
