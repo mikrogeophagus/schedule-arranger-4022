@@ -159,13 +159,20 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
       c,
       `予定: ${schedule.scheduleName}`,
       html`
-        <h4>${schedule.scheduleName}</h4>
-        <p style="white-space: pre;">${schedule.memo}</p>
-        <p>作成者: ${schedule.user.username}</p>
+        <div class="card my-3">
+          <h4 class="card-header">${schedule.scheduleName}</h4>
+          <div class="card-body">
+            <p style="white-space: pre;">${schedule.memo}</p>
+          </div>
+          <div class="card-footer">作成者: ${schedule.user.username}</div>
+        </div>
         ${isMine(user.id, schedule)
-          ? html`<a href="/schedules/${schedule.scheduleId}/edit"
-              >この予定を編集する</a
-            >`
+          ? html`<a
+              href="/schedules/${schedule.scheduleId}/edit"
+              class="btn btn-primary"
+            >
+              この予定を編集する
+            </a>`
           : ""}
         <h3>出欠表</h3>
         <table>
