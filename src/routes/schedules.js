@@ -30,20 +30,22 @@ app.get("/new", ensureAuthenticated(), (c) => {
       c,
       "予定の作成",
       html`
-        <form method="post" action="/schedules">
-          <div>
-            <h5>予定名</h5>
-            <input type="text" name="scheduleName" />
+        <form method="post" action="/schedules" class="my-3">
+          <div class="mb-3">
+            <label class="form-label">予定名</label>
+            <input type="text" name="scheduleName" class="form-control" />
           </div>
-          <div>
-            <h5>メモ</h5>
-            <textarea name="memo"></textarea>
+          <div class="mb-3">
+            <label class="form-label">メモ</label>
+            <textarea name="memo" class="form-control"></textarea>
           </div>
-          <div>
-            <h5>候補日程 (改行して複数入力してください)</h5>
-            <textarea name="candidates"></textarea>
+          <div class="mb-3">
+            <label class="form-label">
+              候補日程 (改行して複数入力してください)
+            </label>
+            <textarea name="candidates" class="form-control"></textarea>
           </div>
-          <button type="submit">予定をつくる</button>
+          <button class="btn btn-primary" type="submit">予定をつくる</button>
         </form>
       `,
     ),
