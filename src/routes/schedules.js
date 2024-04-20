@@ -220,13 +220,18 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
                 const comment = commentMap.get(user.userId);
                 return html`
                   <td>
-                    <p id="${user.isSelf ? "self-comment" : ""}">${comment}</p>
+                      <p>
+                        <small id="${user.isSelf ? "self-comment" : ""}">
+                          ${comment}
+                        </small>
+                      </p>
                     ${user.isSelf
                       ? html`
                           <button
                             data-schedule-id="${schedule.scheduleId}"
                             data-user-id="${user.userId}"
                             id="self-comment-button"
+                            class="btn btn-info"
                           >
                             編集
                           </button>
