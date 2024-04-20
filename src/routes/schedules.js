@@ -177,65 +177,67 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
             </a>`
           : ""}
         <h3 class="my-3">出欠表</h3>
-        <table class="table table-bordered">
-          <tr>
-            <th>予定</th>
-            ${users.map((user) => html`<th>${user.username}</th>`)}
-          </tr>
-          ${candidates.map(
-            (candidate) => html`
-              <tr>
-                <th>${candidate.candidateName}</th>
-                ${users.map((user) => {
-                  const availability = availabilityMapMap
-                    .get(user.userId)
-                    .get(candidate.candidateId);
-                  const availabilityLabels = ["欠", "？", "出"];
-                  const label = availabilityLabels[availability];
-                  return html`
-                    <td>
-                      ${user.isSelf
-                        ? html` <button
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tr>
+              <th>予定</th>
+              ${users.map((user) => html`<th>${user.username}</th>`)}
+            </tr>
+            ${candidates.map(
+              (candidate) => html`
+                <tr>
+                  <th>${candidate.candidateName}</th>
+                  ${users.map((user) => {
+                    const availability = availabilityMapMap
+                      .get(user.userId)
+                      .get(candidate.candidateId);
+                    const availabilityLabels = ["欠", "？", "出"];
+                    const label = availabilityLabels[availability];
+                    return html`
+                      <td>
+                        ${user.isSelf
+                          ? html` <button
+                              data-schedule-id="${schedule.scheduleId}"
+                              data-user-id="${user.userId}"
+                              data-candidate-id="${candidate.candidateId}"
+                              data-availability="${availability}"
+                              class="availability-toggle-button btn btn-lg ${buttonStyles[
+                                availability
+                              ]}"
+                            >
+                              ${label}
+                            </button>`
+                          : html`<h3>${label}</h3>`}
+                      </td>
+                    `;
+                  })}
+                </tr>
+              `,
+            )}
+            <tr>
+              <th>コメント</th>
+              ${users.map((user) => {
+                const comment = commentMap.get(user.userId);
+                return html`
+                  <td>
+                    <p id="${user.isSelf ? "self-comment" : ""}">${comment}</p>
+                    ${user.isSelf
+                      ? html`
+                          <button
                             data-schedule-id="${schedule.scheduleId}"
                             data-user-id="${user.userId}"
-                            data-candidate-id="${candidate.candidateId}"
-                            data-availability="${availability}"
-                            class="availability-toggle-button btn btn-lg ${buttonStyles[
-                              availability
-                            ]}"
+                            id="self-comment-button"
                           >
-                            ${label}
-                          </button>`
-                        : html`<h3>${label}</h3>`}
-                    </td>
-                  `;
-                })}
-              </tr>
-            `,
-          )}
-          <tr>
-            <th>コメント</th>
-            ${users.map((user) => {
-              const comment = commentMap.get(user.userId);
-              return html`
-                <td>
-                  <p id="${user.isSelf ? "self-comment" : ""}">${comment}</p>
-                  ${user.isSelf
-                    ? html`
-                        <button
-                          data-schedule-id="${schedule.scheduleId}"
-                          data-user-id="${user.userId}"
-                          id="self-comment-button"
-                        >
-                          編集
-                        </button>
-                      `
-                    : ""}
-                </td>
-              `;
-            })}
-          </tr>
-        </table>
+                            編集
+                          </button>
+                        `
+                      : ""}
+                  </td>
+                `;
+              })}
+            </tr>
+          </table>
+        </div>
       `,
     ),
   );
