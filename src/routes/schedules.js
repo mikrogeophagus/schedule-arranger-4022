@@ -154,6 +154,8 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
     commentMap.set(comment.userId, comment.comment);
   });
 
+  const buttonStyles = ["btn-danger", "btn-secondary", "btn-success"];
+
   return c.html(
     layout(
       c,
@@ -174,8 +176,8 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
               この予定を編集する
             </a>`
           : ""}
-        <h3>出欠表</h3>
-        <table>
+        <h3 class="my-3">出欠表</h3>
+        <table class="table table-bordered">
           <tr>
             <th>予定</th>
             ${users.map((user) => html`<th>${user.username}</th>`)}
@@ -198,11 +200,13 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
                             data-user-id="${user.userId}"
                             data-candidate-id="${candidate.candidateId}"
                             data-availability="${availability}"
-                            class="availability-toggle-button"
+                            class="availability-toggle-button btn btn-lg ${buttonStyles[
+                              availability
+                            ]}"
                           >
                             ${label}
                           </button>`
-                        : html`<p>${label}</p>`}
+                        : html`<h3>${label}</h3>`}
                     </td>
                   `;
                 })}
