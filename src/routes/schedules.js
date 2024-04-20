@@ -253,34 +253,46 @@ app.get("/:scheduleId/edit", ensureAuthenticated(), async (c) => {
       c,
       `予定の編集: ${schedule.scheduleName}`,
       html`
-        <form method="post" action="/schedules/${schedule.scheduleId}/update">
-          <div>
-            <h5>予定名</h5>
+        <form
+          class="my-3"
+          method="post"
+          action="/schedules/${schedule.scheduleId}/update"
+        >
+          <div class="mb-3">
+            <label class="form-label">予定名</label>
             <input
               type="text"
               name="scheduleName"
+              class="form-control"
               value="${schedule.scheduleName}"
             />
           </div>
-          <div>
-            <h5>メモ</h5>
-            <textarea name="memo">${schedule.memo}</textarea>
+          <div class="mb-3">
+            <label class="form-label">メモ</label>
+            <textarea name="memo" class="form-control">${schedule.memo}</textarea>
           </div>
-          <div>
-            <h5>既存の候補日程</h5>
-            <ul>
+          <div class="mb-3">
+            <label class="form-label">既存の候補日程</label>
+            <ul class="list-group mb-2">
               ${candidates.map(
-                (candidate) => html`<li>${candidate.candidateName}</li>`,
+                (candidate) =>
+                  html`<li class="list-group-item">
+                    ${candidate.candidateName}
+                  </li>`,
               )}
             </ul>
             <p>候補日程の追加 (改行して複数入力してください)</p>
-            <textarea name="candidates"></textarea>
+            <textarea name="candidates" class="form-control"></textarea>
           </div>
-          <button type="submit">以上の内容で予定を編集する</button>
+          <button type="submit" class="btn btn-primary">
+            以上の内容で予定を編集する
+          </button>
         </form>
-        <h3>危険な変更</h3>
+        <h3 class="my-3">危険な変更</h3>
         <form method="post" action="/schedules/${schedule.scheduleId}/delete">
-          <button type="submit">この予定を削除する</button>
+          <button type="submit" class="btn btn-danger">
+            この予定を削除する
+          </button>
         </form>
       `,
     ),
